@@ -17,10 +17,10 @@ This repository for a variant extraction tool based the paper "Variants of Varia
 4. Execute the program: in the comman-line tool ($ python ve_main.py) or in the jupyter notebook "ve_jupyter.ipynb" ($ jupyterlab)
 
 ## ABOUT THE MODULES:
-* ... -> TODO
+* ...
 
 ## EXTENDING THE MODULES:
-* ... -> TODO
+* ...
 
 ## ABOUT IMPORT/EXPORT
 * Event logs should be located in the "data/input" folder.
