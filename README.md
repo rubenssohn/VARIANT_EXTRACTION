@@ -6,7 +6,7 @@ This repository for a variant extraction tool based the paper "Variants of Varia
 * Python (3.11.6): https://www.python.org
 * PM4PY (2.7.8): https://pm4py.fit.fraunhofer.de
 * Jupyter lab (3.6.3): https://jupyter.org
-* Pandas (2.1.1): https: //pandas.pydata.org
+* Pandas (2.1.1): https://pandas.pydata.org
 * NumPy (1.24.3): https://numpy.org
 * Scikit-Learn (1.3.0): https://scikit-learn.org
 
