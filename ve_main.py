@@ -1,8 +1,13 @@
+###########
+### VARIANT EXTRACTION MAIN METHOD
+#######
 from ve_methods.ve_logprocessing import * 
 from ve_methods.ve_propertydefinition import * 
 from ve_methods.ve_featuregeneration import * 
 
+
 def main():
+    """Returns an event log extended with variants."""
     
     print("\n###############\nSTART")
     print("VARIANT ANALYSIS\n---")
@@ -32,7 +37,7 @@ def main():
     # EXTEND AND EXPORT LOGS
     print("\nTASK: Binary mapping.")
     df = exportLogs(df, df_var, COLUMNS)
-    print("Files were exported.")
+    print("Files were exported. Please see the output folder.")
     
     print("\n END\n###############")
     return df

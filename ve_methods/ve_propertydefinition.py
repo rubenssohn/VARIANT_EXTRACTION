@@ -1,13 +1,23 @@
+###########
+### DEFINITIONS FOR PROPERTY DEFINITIONS
+#######
+
 import numpy as np
+
 
 ## GENERAL DATA PROCESSING
 ###
 
 def inputNumbers(min_range=0, max_range=1, message='Select a number from the list:', any_float=False):
-    """Input a number within a certain range. 
+    """An input-prompt function, which allows an integer within a range or any float number. 
+
+    Keyword arguments:
+    min_range -- lower bound range for input (default 0)
+    max_range -- upper bound range for input (default 1)
+    message -- message for input (default 'Select a number from the list:')
+    any_float -- accept any float (default False)
     """
     number = 0
-    
     if any_float == False:
         while True:
             try:
@@ -18,31 +28,30 @@ def inputNumbers(min_range=0, max_range=1, message='Select a number from the lis
                 if min_range <= number <= max_range:
                     break
                 else:
-                    print('Out of range. Try again')
-        
+                    print('Out of range. Try again')  
     elif any_float == True:
         while True and type(number)!=float:
             try:
                 number = float(input(message))
             except ValueError:
-                print('No float. Try again.')
-        
+                print('No float. Try again.')   
     print(f"You chose: {number}")
     return number
 
-def listDictionary(dictionary):
-    """ Prints all entries in a dictionary.
-    """
+def listDictionary(dictionary: dict):
+    """Prints all entries in a dictionary."""
     print("\nList of attributes in the event log:")
     for entry in dictionary:
         print(f"{entry} - {dictionary.get(entry)}") 
 
-# check data type functions
-def datatypeChecker(df, column):
-    """ Returns the datatype (categorical, numerical, timestamp, other) of a column in a dataframe.
+def datatypeChecker(df, column: str):
+    """Returns the datatype (categorical, numerical, timestamp, other) of a column in a dataframe.
+
+    Keyword arguments:
+    df -- dataframe
+    column -- column name
     """
     data_type = ""
-    
     if column in df.select_dtypes(include=['object']):
         data_type = "categorical"
     elif column in df.select_dtypes(include=[np.number, 'number']): # alternative: df._get_numeric_data()
@@ -51,70 +60,69 @@ def datatypeChecker(df, column):
         data_type = "datetime"
     else:
         data_type = "other"
-    
     return data_type
 
-def attributelevelChecker(df, column, CASE_COLUMN):
-    """ Returns the attribute type (case, event, or other) of a column in a dataframe.
+def attributelevelChecker(df, column: str, CASE_COLUMN: str):
+    """Returns the attribute type (case, event, or other) of a column in a dataframe.
+
+    Keyword arguments:
+    df -- event log as dataframe
+    column -- column name
+    CASE_COLUMN -- case column name
     """
     attribute_level = ""
     type_amount = len(df.groupby([CASE_COLUMN], group_keys=True)[column].nunique().unique())
-    
     if 1 == type_amount:
         attribute_level = "case"
     elif 1 < type_amount:
         attribute_level = "event"
     else:
         attribute_level = "other"
-    
     return attribute_level
 
+def functionListing(attribute_type: str, data_type :str):
+    """Returns a list of possible attribute- and data type functions for a certain attribute- and data type.
 
-def functionListing(attribute_type, data_type):
-    """Returns a list of possible attribute and data type functions for a certain attribute- and data type.
+    Keyword arguments:
+    attribute_type -- for instance 'event' or 'case'
+    data_type -- for instance 'categorial' or 'numerical'
     """
-    
     attribute_functions = []
     data_type_functions = []
-    
-    # case
+    # attribute type: case
     if attribute_type=='case':
         attribute_functions.extend(['case'])
-    
-    # event
+    # attribute type: event
     elif attribute_type=='event' and data_type=='numerical':
         attribute_functions.extend(['event_sum', 'event_mean', 'event_median'])
     else:
         attribute_functions.extend(['event_sum'])
-    
-    # categorial or numerical
+    # datatype: categorial or numerical
     if data_type=='categorial' or 'numerical':
         data_type_functions.extend(['categories'])
-    
         if data_type=='categorial':
             # Possible extensions: "selection of some attributes"
             None
-
-        # numerical
+        # datatype: numerical
         if data_type=='numerical':
             data_type_functions.extend(['threshold'])
             # Possible extensions: "binning"
-    
-    # datetime
+    # datatype: datetime
     if data_type=='datetime' or '':
         None
-        
-    # other
+    # datatype: other
     if data_type=='other':
         None
-
     return attribute_functions, data_type_functions
 
-def functionInput(attribute_functions, data_type_functions):
-    """ User can select one function from a list of functions. The selection is returned as a list.
-    """
-    
-    # ToDo: Create an information function for each function
+def functionInput(attribute_functions: list, data_type_functions: list):
+    """User can select one function from a list of functions. The selection is returned as a list.
+
+    Keyword arguments:
+    attribute_functions -- list of all possible attribute functions 
+    data_type_functions -- list of all possible data type functions
+    """ 
+    # TODO: Create an information function for each function
     if len(attribute_functions) > 1:
         print("\nThe following functions are available to summarize the attribute values:")
         attribute_functions_options = {}
@@ -123,7 +131,6 @@ def functionInput(attribute_functions, data_type_functions):
             i+=1
             attribute_functions_options.update({i:f})
             print(f"{i} - {f}")
-    
     if len(data_type_functions) > 1:
         print("\nThe following property functions are available for this attribute:")
         data_type_functions_options = {}
@@ -132,10 +139,9 @@ def functionInput(attribute_functions, data_type_functions):
             i+=1
             data_type_functions_options.update({i:f})
             print(f"{i} - {f}")
-    
+
     # Select an attribute & data type functions
     property_set = []
-    
     if len(attribute_functions) > 1:
         message = "Please choose a function to summarize the attribute values: "
         selection = inputNumbers(min_range=1, max_range=len(attribute_functions_options), message=message)
@@ -144,7 +150,6 @@ def functionInput(attribute_functions, data_type_functions):
     else: 
         #print(attribute_functions)
         property_set.extend(attribute_functions)
-    
     if len(data_type_functions) > 1:
         message = "Please choose a property function: "
         selection = inputNumbers(min_range=1, max_range=len(data_type_functions_options), message=message)
@@ -157,55 +162,55 @@ def functionInput(attribute_functions, data_type_functions):
     else: 
         #print(data_type_functions)
         property_set.extend(data_type_functions)
-
     return property_set
 
 
 ## PROPERTY DEFINITION
 ####
 
-def propertyDefinition(df, CASE_COLUMN):
-    """ Defines all properties. Returns a list of properties.
+def propertyDefinition(df, CASE_COLUMN: str):
+    """A function to define properties for an event log. Returns a property dictionary.
+
+    Keyword arguments:
+    df -- event log as dataframe
+    CASE_COLUMN -- case attribute column
     """
-    
     # list all attributes in event log
     attribute_list = {}
     for index, attribute in enumerate(df.columns.tolist()):
         attribute_list[index] = attribute
     listDictionary(attribute_list)
-    
     # user chooses attributes for property definition
     message = "\nChoose all attributes to consider as a property.\nEnter the keys as a list separated by space:"
     property_keys = my_list = list(map(int,input(message).split()))
     attributes = [attribute_list[key] for key in property_keys]
-    
     # user selects functions for properties
     print("\nCREATE PROPERTIES")
     print("Whenever possible, you will be able to create properties for each chosen attributes.")
     property_dict = propertySelection(df, CASE_COLUMN, attributes)
-    
     # summary of properties created
     print("\n---------------")
     print(f"PROPERTY SUMMARY:")
     print("---------------")
     for p in property_dict:
         print(f"property {p}: {property_dict[p]}")
-    
     return property_dict
 
-def propertySelection(df, CASE_COLUMN, attributes):
-    """ User selects type of properties.
+def propertySelection(df, CASE_COLUMN: str, attributes: list):
+    """Function to prompt user to select type of properties.
+
+    Keyword arguments:
+    df -- event log as dataframe
+    CASE_COLUMN -- case attribute column
+    attributes -- list of attributes to consider in input
     """
-    # ToDo: Extend to create more property types for each attribute
+    # TODO: Extend to create more property types for each attribute
     property_key = 0
     property_dict = {}
-
     for a in attributes:
-        
         # Check if property is numerical or categorical
         attribute_type = attributelevelChecker(df, a, CASE_COLUMN)
         data_type = datatypeChecker(df, a)
-        
         # Description of attribute to help analyst when creating the properties
         print("\n---------------")
         print(f"Attribute: {a}")
@@ -214,7 +219,7 @@ def propertySelection(df, CASE_COLUMN, attributes):
         print(f"data type: {data_type}")
         print(f"max value: {df[a].dropna().unique().max()}")
         print(f"min value: {df[a].dropna().unique().min()}")
-        
+
         loop = True
         while loop:
             property_key+=1
@@ -245,7 +250,5 @@ def propertySelection(df, CASE_COLUMN, attributes):
                 print(f"=> property {property_key} finished (no options available).")
                 loop = False
             property_dict.update({property_key: property_attributes})
-        
-        
     return property_dict
 
