@@ -35,7 +35,7 @@ def main():
     
     # EXTEND AND EXPORT LOGS
     print("\nTASK: Binary mapping.")
-    df = exportLogs(df, df_var, COLUMNS)
+    df = exportLogs(df, df_var, property_dict, COLUMNS)
     print("Files were exported. Please see the output folder.")
     
     print("\n END\n###############")

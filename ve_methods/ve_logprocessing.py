@@ -41,9 +41,7 @@ def importLog(path: str, COLUMNS: dict):
 
     Keyword arguments:
     path -- path to folder with event log
-    case_col -- column name for case attribute
-    activity_col -- column name for activity attribute
-    time_col -- column name for timestamp attribute
+    COLUMNS -- dictionary with column names to indicate e.g., case attribute
     """
 
     # TODO: Extend to .csv-files
@@ -51,7 +49,7 @@ def importLog(path: str, COLUMNS: dict):
     df = df.sort_values(by=COLUMNS.get('time'))
     return df
 
-def exportLogs(df, df_var, COLUMNS: dict, path='data/output/'):
+def exportLogs(df, df_var, property_dict: dict, COLUMNS: dict, path='data/output/'):
     """Simple event log exporter (from dataframe to .CSV).
 
     Keyword arguments:
@@ -61,11 +59,14 @@ def exportLogs(df, df_var, COLUMNS: dict, path='data/output/'):
     path --path to folder (default 'data/output/')
     """
     df = extendwithVariants(df, df_var, COLUMNS)
-    # Export CSV file
+    # Export log
     df.to_csv(path+"variant_log.csv")
-    df_var.to_csv(path+"variant_calculation.csv")
-    # Export XES file
     pm4py.write_xes(df, path+"variant_log.xes")
+    # Export calculations
+    df_var.to_csv(path+"variant_calculation.csv") 
+    # Export propertiy definition
+    with open(path+'variant_properties.txt','w') as dfile:  
+      dfile.write(str(property_dict))
     return df
 
 def extendwithVariants(df, df_var, COLUMNS: dict):
@@ -82,9 +83,8 @@ def extendwithVariants(df, df_var, COLUMNS: dict):
 
 ## INSTANCE LOG PROCESSING
 ####
-# TODO property_columns : change to "property_dict"
 
-def extendInstancelog(df, df_in, COLUMNS: dict, property_dict: dict): # COLUMNS was deleted
+def extendInstancelog(df, df_in, COLUMNS: dict, property_dict: dict):
     """Extends an instance dataset with attribute values. 
 
     Keyword arguments:

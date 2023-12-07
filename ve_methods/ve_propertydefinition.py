@@ -69,7 +69,6 @@ def attributelevelChecker(df, column: str, COLUMNS: dict):
     column -- column name
     COLUMNS -- dictionary with column names to indicate e.g., case attribute
     """
-    #COLUMNS.get('case')
     attribute_level = ""
     type_amount = len(df.groupby([COLUMNS.get('case')], group_keys=True)[column].nunique().unique())
     if 1 == type_amount:

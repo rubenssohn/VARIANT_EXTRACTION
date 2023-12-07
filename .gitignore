@@ -165,3 +165,6 @@ data/.DS_Store
 data/output/variant_log.xes
 data/output/variant_calculation.csv
 data/output/variant_log.csv
+.DS_Store
+.gitignore
+data/output/variant_properties.txt
