@@ -25,7 +25,7 @@ This repository is for a variant extraction tool based on the paper "Variants of
 3. Execute the program:
   a. in the command-line tool: (`$ python ve_main.py`), or
   b. in a Jupyter notebook: Open the Jupyter notebook "ve_jupyter.ipynb" with (`$ jupyterlab`).
-4. After execution, you can retrieve the extended log and its calculations in the folder`"/data/output"`. 
+4. After execution, you can retrieve the extended log and its calculations in the folder `"/data/output"`. 
 
 ## Usage
 The program will guide you through five stages:
@@ -33,12 +33,14 @@ The program will guide you through five stages:
 2. PROPERTY DEFINITION: You are able to define properties to calculate variants.
 3. INSTANCE DEFINITION: The program creates a new instance log (automatically).
 4. BINARY MAPPING & VARIANT CLASSIFICATION: The program utilizes a one-hot encoder to transform the log based on the properties and calculate the variants.
-5. EXTEND & EXPORT LOGS: The calculated variants are integrated into the original log and exported (.xes+.csv) together with a .csv file containing the calculations.
+5. EXTEND & EXPORT LOGS: The calculated variants are integrated into the original log as a new column with variant numbers and exported as both a .xes as well as a .csv file together with a .csv file containing the calculations and the properties as a .txt file.
 
-The exported log can be used for further calculations in another program. The calculation .csv file can be used to gain more insights about the calculations.
+The exported log can be used for further calculations in another program (.xes and .csv). The calculation .csv file can be used to gain more insights about the calculations. The properties are exported as a .txt file.
 
 ### Property Definition (Pre-Processing Functions)
-Whenever the program prompts you to define properties, you are able to define various properties depending on the type of attribute (case/event) or type of data (categorical/numerical). Based on these properties, the program first creates a new log, a so-called instance log, in which each row refers to a case, and every column is the summarized value based on the properties defined. The instance log is later used by the program to create the variants.
+Whenever the program prompts you to define properties, you are able to define various properties depending on the type of attribute (case/event) or type of data (categorical/numerical). 
+Based on these properties, the program first creates a new log, a so-called instance log, in which each row refers to a case, and every column is the summarized value based on the properties defined. 
+The instance log is later used by the program to create the variants.
 
 **The functions implemented for each attribute and data type are as follows:**
 
