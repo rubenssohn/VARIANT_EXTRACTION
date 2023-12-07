@@ -61,8 +61,11 @@ def exportLogs(df, df_var, COLUMNS: dict, path='data/output/'):
     path --path to folder (default 'data/output/')
     """
     df = extendwithVariants(df, df_var, COLUMNS)
+    # Export CSV file
     df.to_csv(path+"variant_log.csv")
     df_var.to_csv(path+"variant_calculation.csv")
+    # Export XES file
+    pm4py.write_xes(df, path+"variant_log.xes")
     return df
 
 def extendwithVariants(df, df_var, COLUMNS: dict):

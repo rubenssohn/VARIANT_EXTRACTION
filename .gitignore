@@ -162,3 +162,6 @@ ve_jupyter_test.ipynb
 data/input/sepsis-log.xes
 data/input/repairExample.xes
 data/.DS_Store
+data/output/variant_log.xes
+data/output/variant_calculation.csv
+data/output/variant_log.csv
