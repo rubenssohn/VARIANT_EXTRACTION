@@ -33,7 +33,7 @@ The program will guide you through five stages:
 2. PROPERTY DEFINITION: You are able to define properties to calculate variants.
 3. INSTANCE DEFINITION: The program creates a new instance log (automatically).
 4. BINARY MAPPING & VARIANT CLASSIFICATION: The program utilizes a one-hot encoder to transform the log based on the properties and calculate the variants.
-5. EXTEND & EXPORT LOGS: The calculated variants are integrated into the original log and exported together with a .csv file containing the calculations.
+5. EXTEND & EXPORT LOGS: The calculated variants are integrated into the original log and exported (.xes+.csv) together with a .csv file containing the calculations.
 
 The exported log can be used for further calculations in another program. The calculation .csv file can be used to gain more insights about the calculations.
 
