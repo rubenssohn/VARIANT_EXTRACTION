@@ -14,16 +14,15 @@ def main():
     
     # IMPORT
     print("\nTASK: Log import")
-    df, COLUMNS = importLog("data/input/sepsis-log.xes")
+    logname, COLUMNS = selectLog()
+    df  = importLog(f"data/input/{logname}", COLUMNS)
 
     # PROPERTY DEFINITION
     print("\nTASK: Property definition")
-    #property_columns = propertyDefinition2(df) # OLD
-    property_dict = propertyDefinition(df, CASE_COLUMN)
+    property_dict = propertyDefinition(df, COLUMNS)
     
     # INSTANCE DEFINITION
     print("\nTASK: Instance definition")
-    #df_in = instancelogConversion2(df, COLUMNS, property_columns) # OLD
     df_in = instancelogConversion(df, COLUMNS, property_dict)
     
     print(df_in)

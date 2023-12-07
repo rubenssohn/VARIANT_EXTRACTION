@@ -40,7 +40,6 @@ def inputNumbers(min_range=0, max_range=1, message='Select a number from the lis
 
 def listDictionary(dictionary: dict):
     """Prints all entries in a dictionary."""
-    print("\nList of attributes in the event log:")
     for entry in dictionary:
         print(f"{entry} - {dictionary.get(entry)}") 
 
@@ -62,16 +61,17 @@ def datatypeChecker(df, column: str):
         data_type = "other"
     return data_type
 
-def attributelevelChecker(df, column: str, CASE_COLUMN: str):
+def attributelevelChecker(df, column: str, COLUMNS: dict):
     """Returns the attribute type (case, event, or other) of a column in a dataframe.
 
     Keyword arguments:
     df -- event log as dataframe
     column -- column name
-    CASE_COLUMN -- case column name
+    COLUMNS -- dictionary with column names to indicate e.g., case attribute
     """
+    #COLUMNS.get('case')
     attribute_level = ""
-    type_amount = len(df.groupby([CASE_COLUMN], group_keys=True)[column].nunique().unique())
+    type_amount = len(df.groupby([COLUMNS.get('case')], group_keys=True)[column].nunique().unique())
     if 1 == type_amount:
         attribute_level = "case"
     elif 1 < type_amount:
@@ -168,17 +168,18 @@ def functionInput(attribute_functions: list, data_type_functions: list):
 ## PROPERTY DEFINITION
 ####
 
-def propertyDefinition(df, CASE_COLUMN: str):
+def propertyDefinition(df, COLUMNS: dict):
     """A function to define properties for an event log. Returns a property dictionary.
 
     Keyword arguments:
     df -- event log as dataframe
-    CASE_COLUMN -- case attribute column
+    COLUMNS -- dictionary with column names to indicate e.g., case attribute
     """
     # list all attributes in event log
     attribute_list = {}
     for index, attribute in enumerate(df.columns.tolist()):
         attribute_list[index] = attribute
+    print("\nList of attributes in the event log:")
     listDictionary(attribute_list)
     # user chooses attributes for property definition
     message = "\nChoose all attributes to consider as a property.\nEnter the keys as a list separated by space:"
@@ -187,7 +188,7 @@ def propertyDefinition(df, CASE_COLUMN: str):
     # user selects functions for properties
     print("\nCREATE PROPERTIES")
     print("Whenever possible, you will be able to create properties for each chosen attributes.")
-    property_dict = propertySelection(df, CASE_COLUMN, attributes)
+    property_dict = propertySelection(df, COLUMNS, attributes)
     # summary of properties created
     print("\n---------------")
     print(f"PROPERTY SUMMARY:")
@@ -196,12 +197,12 @@ def propertyDefinition(df, CASE_COLUMN: str):
         print(f"property {p}: {property_dict[p]}")
     return property_dict
 
-def propertySelection(df, CASE_COLUMN: str, attributes: list):
+def propertySelection(df, COLUMNS: dict, attributes: list):
     """Function to prompt user to select type of properties.
 
     Keyword arguments:
     df -- event log as dataframe
-    CASE_COLUMN -- case attribute column
+    COLUMNS -- dictionary with column names to indicate e.g., case attribute
     attributes -- list of attributes to consider in input
     """
     # TODO: Extend to create more property types for each attribute
@@ -209,7 +210,7 @@ def propertySelection(df, CASE_COLUMN: str, attributes: list):
     property_dict = {}
     for a in attributes:
         # Check if property is numerical or categorical
-        attribute_type = attributelevelChecker(df, a, CASE_COLUMN)
+        attribute_type = attributelevelChecker(df, a, COLUMNS)
         data_type = datatypeChecker(df, a)
         # Description of attribute to help analyst when creating the properties
         print("\n---------------")
