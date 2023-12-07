@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 ve_jupyter_test.ipynb
 data/input/sepsis-log.xes
+data/input/repairExample.xes
+data/.DS_Store
