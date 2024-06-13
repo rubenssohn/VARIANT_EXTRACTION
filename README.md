@@ -1,7 +1,8 @@
 # VARIANT_EXTRACTION
 This repository comprises the variant extraction tool proposed in the paper "Variants of Variants: Context-based Variant Analysis for Process Mining," which was published in the Advanced Information Systems Engineering Proceeding from Springer 2024. 
 
-Reference:
+*Reference:*
+
 Rubensson, C., Mendling, J., Weidlich, M. (2024). Variants of Variants: Context-Based Variant Analysis for Process Mining. In: Guizzardi, G., Santoro, F., Mouratidis, H., Soffer, P. (eds) Advanced Information Systems Engineering. CAiSE 2024. Lecture Notes in Computer Science, vol 14663. Springer, Cham. https://doi.org/10.1007/978-3-031-61057-8_23
 
 ---
