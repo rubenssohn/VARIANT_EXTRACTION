@@ -80,3 +80,11 @@ The program might not be able to map all data types properly. The reason for thi
 2. Second, the program may not handle logs with attributes of mixed data types (e.g., str + int), or case attributes with no value (all cells for a case are empty). 
    
 In these cases, please consider pre-processing the log, e.g., using Disco, PM4Py, or ProM. 
+
+### Contact:
+Feel free to contact me for any problems with the program. You find my contact details on https://hu-berlin.de/rubensson.
+
+---
+## Licences and dependencies
+
+This project is distributed under the AGPLv3. It makes use of third-party Python and JavaScript packages, whose licenses are provided in the `LICENCES_thirdparty/` directory.
