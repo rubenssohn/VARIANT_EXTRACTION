@@ -1,0 +1,85 @@
+import math
+import numpy as np
+import pandas as pd
+import pm4py
+
+def simplifyLog(df: pd.DataFrame, 
+                lifecycle_activities=False, 
+                filter_cases = 0, 
+                filter_variants_k = 0, 
+                filter_variants_per = 0):
+    '''simplifies a log by keeping only necessary attributes.
+    '''
+    #keep following columns
+    CASE_COL = 'case:concept:name'
+    ACT_COL = 'concept:name'
+    TIME_COL = 'time:timestamp'
+    lifecycle = 'lifecycle:transition'
+    # create new activities with transitions
+    if (lifecycle_activities == True and 
+        lifecycle in df.columns):
+        if len(df[lifecycle].unique()) > 1:
+            df[ACT_COL] = df[ACT_COL] + '-' + df[lifecycle]
+        else:
+            print('Message: No transition-activity were be created. Only one type of lifecycle transition in log.')
+    else:
+        print('Message: No transition-activity were be created. No transition column.')
+    # keep only k amount cases in the log
+    total_num_variants = len(pm4py.get_variants(df))
+    if filter_cases > 0:
+        case_list = df[CASE_COL].unique()[0:filter_cases]
+        df = pm4py.filter_event_attribute_values(df, CASE_COL, case_list, level="case", retain=True).copy()
+    elif filter_variants_k > 0:
+        df = pm4py.filter_variants_top_k(df, filter_variants_k).copy()
+    elif filter_variants_per > 0:
+        filter_variants_k = math.ceil(filter_variants_per*total_num_variants)
+        df = pm4py.filter_variants_top_k(df, filter_variants_k).copy()
+
+    #filter log
+    keep_columns = [CASE_COL, ACT_COL, TIME_COL]
+    df = df.filter(keep_columns)
+    return df
+
+# Create relative timestamps
+def relativeTimestamps(
+        df: pd.DataFrame,
+        CASE_COL="case:concept:name",
+        TIME_COL="time:timestamp",
+        RTIME_COL="time:timestamp:relative",
+        RTIME_SEC_COL="time:relative:seconds"):
+    '''adds relative timestamps to dataframe (log).
+    '''
+    starttimes_dict = df.groupby(CASE_COL)[TIME_COL].min().to_dict()
+    df["time:timestamp:casestart"] = df[CASE_COL].map(starttimes_dict)
+    df[RTIME_COL] = df[TIME_COL] - df["time:timestamp:casestart"]
+    df[RTIME_SEC_COL] = df[RTIME_COL].apply(lambda t: t.total_seconds()).astype(int)
+    df['time:relative:seconds:log'] = np.log(df[RTIME_SEC_COL] + 1)
+
+    return df
+
+# Filtering
+def normalize_reltimes_log(
+        df: pd.DataFrame, 
+        RTIME_SEC_COL="time:relative:seconds", 
+        CASE_COL="case:concept:name",
+        NRTIMECASE_COL = "time:relative:normalized:case", 
+        NRTIMELOG_COL = "time:relative:normalized:log"):
+    """Normalize relative timestamps by log and by case."""
+    # define relative timestamps
+    df = relativeTimestamps(df)
+
+    # --- log-level normalization of relative timestamps
+    mins_l = df[RTIME_SEC_COL].min()
+    maxs_l = df[RTIME_SEC_COL].max()
+    denom_l = (maxs_l - mins_l)
+    df[NRTIMELOG_COL] = (df[RTIME_SEC_COL] - mins_l) / denom_l
+
+    # --- case-level normalization of relative timestamps
+    eventgroups = df.groupby(CASE_COL)[RTIME_SEC_COL]
+    mins_c = eventgroups.transform("min")
+    maxs_c = eventgroups.transform("max")
+    denom_c = (maxs_c - mins_c)
+    # avoid division-by-zero
+    df[NRTIMECASE_COL] = (df[RTIME_SEC_COL] - mins_c) / denom_c.replace(0, pd.NA)
+    df[NRTIMECASE_COL] = df[NRTIMECASE_COL].fillna(0)
+    return df

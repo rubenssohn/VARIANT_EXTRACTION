@@ -1,4 +1,4 @@
 from . import (
-    util,
+    utils,
     cm_methods
 )
