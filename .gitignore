@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+concvenv/
 
 # Spyder project settings
 .spyderproject
@@ -168,3 +169,14 @@ data/output/variant_log.csv
 .DS_Store
 .gitignore
 data/output/variant_properties.txt
+data/input/bpic2011_hospitallog.xes
+.gitignore
+.gitignore
+data/input/nasa-cev-complete-splitted.xes
+data/input/sepsis_log.xes
+data/input/other/bpic2012.xes
+.gitignore
+data/input/other/mimic_hf_combined_poe_filtered_updated.xes
+.gitignore
+data/input/other/roadtrafficfine.xes
+data/input/other/sepsis-log.xes
