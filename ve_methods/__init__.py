@@ -1,5 +1,5 @@
 '''
-VARIANT_EXTRACTION — A CLI tool to extract context-based process variants from conventional event logs.
+VARIANT_EXTRACTION — A Python package and CLI tool to extract and visualize process behaviors from complex event data.
 Copyright (C) 2023  Christoffer Rubensson
 
 This program is free software: you can redistribute it and/or modify
