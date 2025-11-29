@@ -8,7 +8,7 @@ See information for each package below.
 ---
 ## (A) Concise Models Visualization and Evaluation Package 
 
-![Figure: Three example concise models.](images/example_concisemodels)
+![Figure: Three example concise models.](images/example_concisemodels.png)
 
 *Figure: Three example concise models.*
 
@@ -28,7 +28,7 @@ Here, we go through all the necessary functions for log preperation, model disco
 ---
 ## (B) Context-Based Variant Extraction CLI Tool
 
-![Figure: Example variant graphs from Rubensson et al. (Fig. 1, 2024).](images/example_variantsfuzzy)
+![Figure: Example variant graphs from Rubensson et al. (Fig. 1, 2024).](images/example_variantsfuzzy.png)
 
 *Figure: Example variant graphs from Rubensson et al. (Fig. 1, 2024).*
 
@@ -112,6 +112,8 @@ This project is distributed under the AGPLv3. It makes use of third-party Python
 
 ## References related to this package:
 Rubensson, C., Mendling, J., Weidlich, M. (2024). Variants of Variants: Context-Based Variant Analysis for Process Mining. In: Guizzardi, G., Santoro, F., Mouratidis, H., Soffer, P. (eds) Advanced Information Systems Engineering. CAiSE 2024. Lecture Notes in Computer Science, vol 14663. Springer, Cham. https://doi.org/10.1007/978-3-031-61057-8_23
+
+Furthermore, in the `data/input`, we have an event log stemming from https://processmining.org/old-version/event-book.html. 
 
 ### Contact:
 Feel free to contact me for any problems with the program. You find my contact details on https://hu-berlin.de/rubensson.
