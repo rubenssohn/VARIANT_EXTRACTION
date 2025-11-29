@@ -8,6 +8,10 @@ See information for each package below.
 ---
 ## (A) Concise Models Visualization and Evaluation Package 
 
+![Figure: Three example concise models.](images/example_concisemodels)
+
+*Figure: Three example concise models.*
+
 ### Setup
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
@@ -23,6 +27,10 @@ Here, we go through all the necessary functions for log preperation, model disco
 
 ---
 ## (B) Context-Based Variant Extraction CLI Tool
+
+![Figure: Example variant graphs from Rubensson et al. (Fig. 1, 2024).](images/example_variantsfuzzy)
+
+*Figure: Example variant graphs from Rubensson et al. (Fig. 1, 2024).*
 
 ### Setup
 1. Install the necessary packages (see the requirements below)
