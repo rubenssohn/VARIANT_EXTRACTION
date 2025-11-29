@@ -83,3 +83,69 @@ def normalize_reltimes_log(
     df[NRTIMECASE_COL] = (df[RTIME_SEC_COL] - mins_c) / denom_c.replace(0, pd.NA)
     df[NRTIMECASE_COL] = df[NRTIMECASE_COL].fillna(0)
     return df
+
+# Activity statistics
+def get_activity_statistics(activity, 
+                            CASE_COL="case:concept:name", 
+                            RTIME_COL="time:relative:seconds", 
+                            NRTIMELOG_COL="time:relative:normalized:log", 
+                            NRTIMECASE_COL="time:relative:normalized:case"):
+    """Calculate statistics for a given activity in an event log."""
+    
+    qs = [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1.0]  # quantiles
+    
+    # --- Frequencies per case ---
+    freq_percase_list = activity.groupby(CASE_COL)[RTIME_COL].count()
+    freq_percase_quantiles = freq_percase_list.quantile(qs)
+    freq_percase_mean = freq_percase_list.mean()
+    #freq_percase_mode = freq_percase_list.mode()
+    freq_percase_median = freq_percase_list.median()
+    freq_percase_var = freq_percase_list.var(ddof=0)
+    freq_percase_std = freq_percase_list.std(ddof=0)
+    freq_percase_skew = freq_percase_list.skew()
+    
+    # --- Positions based on relative normalized times by log and by case ---
+    pos_log_list = activity[NRTIMELOG_COL]
+    #print(pos_log_list)
+    pos_log_quantiles = pos_log_list.quantile(qs)
+    pos_log_mean, pos_log_median, pos_log_var, pos_log_std, pos_log_skew =\
+    pos_log_list.mean(), pos_log_list.median(), pos_log_list.var(ddof=0), pos_log_list.std(ddof=0), pos_log_list.skew()
+    
+    pos_percase_list = activity[NRTIMECASE_COL]
+    #print(pos_percase_list)
+    pos_percase_quantiles = pos_percase_list.quantile(qs)
+    pos_percase_mean, pos_percase_median, pos_percase_var, pos_percase_std, pos_percase_skew =\
+    pos_percase_list.mean(), pos_percase_list.median(), pos_percase_list.var(ddof=0), pos_percase_list.std(ddof=0), pos_percase_list.skew()
+    
+    # --- Data ---
+    data = {
+        'freq_log_absolute': len(activity[RTIME_COL]),
+        'freq_percase_mean': freq_percase_mean,
+        #'freq_percase_mode': freq_percase_mode,
+        'freq_percase_median': freq_percase_median,
+        'freq_percase_var': freq_percase_var,
+        'freq_percase_std': freq_percase_std,
+        'freq_percase_skew': freq_percase_skew,
+        'pos_log_mean': pos_log_mean,
+        #'pos_log_mode': pos_log_mode,
+        'pos_log_median': pos_log_median,
+        'pos_log_var': pos_log_var,
+        'pos_log_std': pos_log_std,
+        'pos_log_skew': pos_log_skew,
+        'pos_percase_mean': pos_percase_mean,
+        #'pos_percase_mode': pos_percase_mode,
+        'pos_percase_median': pos_percase_median,
+        'pos_percase_var': pos_percase_var,
+        'pos_percase_std': pos_percase_std,
+        'pos_percase_skew': pos_percase_skew
+    }
+    
+    # add quantiles to data
+    for q, val in zip(qs, freq_percase_quantiles):
+        data[f'freq_percase_q{int(q*100):02d}'] = val
+    for q, val in zip(qs, pos_log_quantiles):
+        data[f'pos_log_q{int(q*100):02d}'] = val
+    for q, val in zip(qs, pos_percase_quantiles):
+        data[f'pos_percase_q{int(q*100):02d}'] = val
+    
+    return pd.Series(data)
