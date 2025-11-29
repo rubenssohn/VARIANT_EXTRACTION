@@ -40,3 +40,20 @@ def discover_dependency_graph(
         DepG.add_edge(act, act, weight=0)
     
     return DepG
+
+def discover_multi_dependency_graphs(
+        df, 
+        dependency_threshold=0.5, 
+        ACT_COL="concept:name", 
+        LEVEL_COL="stage:number"):
+    """Discover multiple dependency graphs, one for each stage.
+    """
+    multipleDepG = []
+    levels = df[LEVEL_COL].unique()
+    for level in levels:
+        depG = discover_dependency_graph(
+            df=df.loc[df[LEVEL_COL].isin([level])], 
+            dependency_threshold=dependency_threshold, ACT_COL=ACT_COL)
+        depG.graph["name"] = level
+        multipleDepG.append(depG)
+    return multipleDepG
