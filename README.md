@@ -1,5 +1,8 @@
 # VARIANT_EXTRACTION
-This repository comprises the variant extraction tool proposed in the paper "Variants of Variants: Context-based Variant Analysis for Process Mining," published in the Advanced Information Systems Engineering Proceeding from Springer in 2024. 
+This repository comprises packages for extract and visualize process variants. It contains:
+- `variant_extraction/cm_methods`: Sub package for creating concise models 
+> Please note that this will be available on Novemeber, 30th the latest! This README file will be updated with more information.
+- `vm_methods`: A CLI Tool for extracting context-based variants as proposed in Rubensson et al. (2024).
 
 *Reference:*
 
