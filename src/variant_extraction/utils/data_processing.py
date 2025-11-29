@@ -161,3 +161,16 @@ def map_values_to_col(df, df_ranks, key_cols, rank_col_name):
             .to_dict()
     )
     return df[key_cols].apply(tuple, axis=1).map(rank_dict)
+
+def add_activity_position_percase(
+        df: pd.DataFrame,
+        CASE_COL="case:concept:name", 
+        ACT_COL="concept:name", 
+        TIME_COL="time:timestamp", 
+        ORDER_COL="order:position", 
+        MAXORDER_COL="order:position:max"):
+    # df columns: case, time, activity
+    df = df.sort_values([CASE_COL, TIME_COL]).copy()
+    df[ORDER_COL] = df.groupby([CASE_COL, ACT_COL]).cumcount()
+    df[MAXORDER_COL] = df.groupby([CASE_COL, ACT_COL])[ORDER_COL].transform("max")
+    return df
