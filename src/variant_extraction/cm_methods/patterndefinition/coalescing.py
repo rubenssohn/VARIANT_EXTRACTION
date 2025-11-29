@@ -1,4 +1,5 @@
-from utils.data_processing import get_activity_statistics
+import pandas as pd
+from ...utils.data_processing import get_activity_statistics
 
 #####################
 ### COALESCING and FILTERING

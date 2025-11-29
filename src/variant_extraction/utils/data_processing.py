@@ -174,3 +174,50 @@ def add_activity_position_percase(
     df[ORDER_COL] = df.groupby([CASE_COL, ACT_COL]).cumcount()
     df[MAXORDER_COL] = df.groupby([CASE_COL, ACT_COL])[ORDER_COL].transform("max")
     return df
+
+def group_unique_values_to_dict(
+    df: pd.DataFrame, 
+    key_col: str, 
+    item_col: str,
+    order_by: str | None = None,
+    ascending: bool = True,
+):
+    '''
+    Group the dataframe by `key_col` and return a dictionary where each key is a 
+    unique value from `key_col` and each value is a list of unique `item_col` 
+    entries for that group. Optionally sort each group's values by `order_by`.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        The input dataframe.
+    key_col : str
+        The column to group by.
+    item_col : str
+        The column whose unique values will be collected for each group.
+    order_by : str, optional
+        Column used to sort values within each group before collecting them.
+        If None, values are returned in their original appearance order.
+    ascending : bool, optional
+        Whether sorting by `order_by` is ascending.
+
+    Returns
+    -------
+    dict
+        Mapping each unique `key_col` value to a list of unique `item_col` values.
+    '''
+    
+    grouped = df.groupby(key_col)
+
+    result = {}
+
+    for key, group in grouped:
+        if order_by:
+            group = group.sort_values(order_by, ascending=ascending)
+
+        # ensure uniqueness in sorted order
+        unique_vals = group[item_col].drop_duplicates().tolist()
+
+        result[key] = unique_vals
+
+    return result

@@ -1,5 +1,5 @@
 from cdlib import algorithms
-from visualization.modeldiscovery import discover_dependency_graph
+from ..visualization.modeldiscovery import discover_dependency_graph
 import networkx as nx
 import pandas as pd
 

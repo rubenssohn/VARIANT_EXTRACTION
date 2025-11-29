@@ -1,11 +1,25 @@
 import pandas as pd
-from patterndefinition.coalescing import apply_coalescing_to_dataframe
-from patterndefinition.communitydetection import discover_communities_in_graph, return_community_column
-from patterndefinition.ranking import rank_entities
-from patterndefinition.stagecreation import return_timewindows_column
-from visualization.modeldiscovery import discover_multi_dependency_graphs
-from visualization.representativeexecutions import get_most_common_activities_per_stage_column, define_multiactivity_column, create_column_withnames_for_hiddenactivities
-from utils.data_processing import simplifyLog, normalize_reltimes_log, add_activity_position_percase, map_values_to_col
+from .patterndefinition.coalescing import (
+    apply_coalescing_to_dataframe)
+from .patterndefinition.communitydetection import (
+    discover_communities_in_graph, 
+    return_community_column)
+from .patterndefinition.ranking import (
+    rank_entities)
+from .patterndefinition.stagecreation import (
+    return_timewindows_column)
+from .visualization.modeldiscovery import (
+    discover_multi_dependency_graphs)
+from .visualization.representativeexecutions import (
+    get_most_common_activities_per_stage_column, 
+    define_multiactivity_column, 
+    create_column_withnames_for_hiddenactivities)
+from ..utils.data_processing import (
+    simplifyLog, 
+    normalize_reltimes_log, 
+    add_activity_position_percase, 
+    map_values_to_col
+)
 
 #####################
 ### ORCHESTRATION: LOG ENHANCEMENT
@@ -35,7 +49,7 @@ def enhance_log_for_concise_model(
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    df : pd.DataFrame
         The event log dataframe.
 
     ACT_COL : str, default="concept:name"
