@@ -149,3 +149,15 @@ def get_activity_statistics(activity,
         data[f'pos_percase_q{int(q*100):02d}'] = val
     
     return pd.Series(data)
+
+def map_values_to_col(df, df_ranks, key_cols, rank_col_name):
+    '''Maps values from df_ranks into df using the key_cols.
+    Assumes key_cols form a unique key in df_ranks.
+    '''
+    # Build a MultiIndex dictionary
+    rank_dict = (
+        df_ranks
+            .set_index(key_cols)[rank_col_name]
+            .to_dict()
+    )
+    return df[key_cols].apply(tuple, axis=1).map(rank_dict)
