@@ -180,3 +180,7 @@ data/input/other/mimic_hf_combined_poe_filtered_updated.xes
 .gitignore
 data/input/other/roadtrafficfine.xes
 data/input/other/sepsis-log.xes
+data/input/bpic2013_incidents.xes
+.gitignore
+data/input/other/future_factory_event_log.xes
+data/input/other/repairExample.xes
