@@ -1,0 +1,15 @@
+# === Required for core app ===
+numpy
+pandas
+pm4py
+cdlib[C]
+graphviz
+scikit-learn
+# === Optional for Jupyter notebook ===
+plotly
+ipykernel
+pygraphviz
+nbformat
+networkx
+matplotlib
+seaborn
