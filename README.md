@@ -10,7 +10,7 @@ See information for each package below.
 
 ![Figure: Three example concise models.](images/example_concisemodels.png)
 
-*Figure: Three example concise models.*
+*Figure: Three examples of concise models.*
 
 ### Setup
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
