@@ -20,6 +20,7 @@ E-Mail: {firstname.lastname}@hu-berlin.de
 '''
 
 import pandas as pd
+import pm4py
 from .patterndefinition.coalescing import (
     apply_coalescing_to_dataframe)
 from .patterndefinition.communitydetection import (
@@ -39,7 +40,8 @@ from ..utils.data_processing import (
     simplifyLog, 
     normalize_reltimes_log, 
     add_activity_position_percase, 
-    map_values_to_col
+    map_values_to_col,
+    group_unique_values_to_dict
 )
 
 #####################
@@ -253,3 +255,48 @@ def enhance_log_for_concise_model(
     # viii. RETURN ENHANCED LOG
     # -------------------------------------------------------------
     return df_log
+
+#####################
+### ORCHESTRATION: MODEL DISCOVERY
+#####################
+def discover_concise_model(
+        df: pd.DataFrame,
+        STAGE_COL = "stage:number",
+        MULTI_ACT_COL = "concept:name:multiact",
+        MULTI_COMM_COL = "concept:name:communities"):
+    '''
+    Discover a concise process model from an event log.
+
+    This function extracts a directly-follows graph (DFG) comprising of communities as nodes, identifies 
+    start and end nodes, and maps the relationships between stages, communities, 
+    and activities.
+
+    Parameters:
+        df (pd.DataFrame): Event log as a pandas DataFrame.
+        STAGE_COL (str): Name of the column representing stages (default: "stage:number").
+        MULTI_ACT_COL (str): Name of the column representing activity names (multi-activity) 
+                             (default: "concept:name:multiact").
+        MULTI_COMM_COL (str): Name of the column representing community identifiers 
+                              (multi-community) (default: "concept:name:communities").
+
+    Returns:
+        dfg_comm (list of tuple): DFG as a list of edges; each edge is a 
+                                  tuple (from_activity, to_activity) representing a transition 
+                                  between communities.
+        s_comm (dict): Dictionary of start activities — activities that have no incoming edges in the DFG.
+        e_comm (dict): Dictionary of end activities — activities that have no outgoing edges in the DFG.
+        stage_comm_dict (dict): Dictionary mapping stage identifiers to the set (or list) of 
+                                communities within each stage.
+        comm_acts_dict (dict): Dictionary mapping community identifiers to the set (or list) 
+                               of activities within each community.
+    '''
+    # discover DFG
+    dfg_comm, s_comm, e_comm = pm4py.discover_dfg(
+        df, activity_key=MULTI_COMM_COL)
+    # discover stage-community connections
+    stage_comm_dict = group_unique_values_to_dict(
+        df, key_col=STAGE_COL, item_col=MULTI_COMM_COL, order_by="community_rank_within")
+    # discover community-activity connections
+    comm_acts_dict = group_unique_values_to_dict(
+        df, key_col=MULTI_COMM_COL, item_col=MULTI_ACT_COL)
+    return dfg_comm, s_comm, e_comm, stage_comm_dict, comm_acts_dict
