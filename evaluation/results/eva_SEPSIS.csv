@@ -1,0 +1,5 @@
+log_name,num_cases,num_events,num_activities,num_comtactivities,num_stages,num_communities,num_nodes,num_edges,num_cycles,num_selfloops,sum_selfloops_weight
+SEPSIS_0,1050,15214,16,,,,16,115,5224,5,1034
+SEPSIS_1,1050,9600,16,16.0,2.0,9.0,9,34,15,7,4604
+SEPSIS_2,1050,9600,16,22.0,2.0,9.0,6,23,12,6,4609
+SEPSIS_3,1050,9600,16,43.0,4.0,26.0,12,56,16,9,4658

@@ -1,0 +1,5 @@
+log_name,num_cases,num_events,num_activities,num_comtactivities,num_stages,num_communities,num_nodes,num_edges,num_cycles,num_selfloops,sum_selfloops_weight
+BPIC13inc_0,7554,65533,4,,,,4,11,10,3,29045
+BPIC13inc_1,7554,19614,4,4.0,2.0,5.0,5,10,3,1,1698
+BPIC13inc_2,7554,19614,4,5.0,2.0,5.0,5,8,2,1,7703
+BPIC13inc_3,7554,19614,4,8.0,4.0,11.0,11,34,8,2,11
