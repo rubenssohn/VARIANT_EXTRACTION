@@ -40,7 +40,11 @@ We also list some of the most important functions below.
 Import functions
 ```python
 from varexpm.utils import load_event_log # import log
-from varexpm.cm_methods import (enhance_log_for_concise_model, discover_concise_model, build_concise_dfg, generate_evaluation_statistics_df) # for enhancement, discovery, visualization, and evaluation
+from varexpm.cm_methods import (
+  enhance_log_for_concise_model, # log enhancement
+  discover_concise_model, # model discovery
+  build_concise_dfg, # model visualization
+  generate_evaluation_statistics_df) # evaluation
 ```
 #### Log import:
 ```python
