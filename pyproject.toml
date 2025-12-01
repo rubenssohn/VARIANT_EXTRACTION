@@ -29,12 +29,6 @@ dependencies = [
     "pm4py>=2.7",
     "scikit-learn>=1.7",
 ]
-[project.optional-dependencies]
-notebooks = [
-    "jupyterlab>=4.0",
-    "notebook>=7.0",
-    "ipykernel>=6.0"
-]
 keywords = [
   "process mining", 
   "event data", 
@@ -47,6 +41,12 @@ keywords = [
 [project.urls]
 Homepage = "https://github.com/rubenssohn/VARIANT_EXTRACTION"
 
+[project.optional-dependencies]
+notebooks = [
+    "jupyterlab>=4.0",
+    "notebook>=7.0",
+    "ipykernel>=6.0"
+]
+
 [tool.setuptools.packages.find]
 where = ["src"]
-
