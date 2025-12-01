@@ -1,15 +1,15 @@
 # === Required for core app ===
-numpy
-pandas
-pm4py
-cdlib[C]
-graphviz
-scikit-learn
+numpy>=2.2
+pandas>=2.3
+pm4py>=2.7
+cdlib[C]>=0.4
+graphviz>=0.21
+scikit-learn>=1.7
+networkx>=3.5
 # === Optional for Jupyter notebook ===
 plotly
 ipykernel
 pygraphviz
 nbformat
-networkx
 matplotlib
 seaborn
