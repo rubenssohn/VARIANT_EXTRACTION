@@ -18,3 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Website: https://hu-berlin.de/rubensson
 E-Mail: {firstname.lastname}@hu-berlin.de
 '''
+
+from .data_importing import load_event_log
+
+__all__ = ["load_event_log"]

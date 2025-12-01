@@ -33,6 +33,9 @@ The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` is
 > - Finally, (3) open jupyter with `jupyter lab` in the terminal, go to the notebook, and add the environment as a kernel in the upper-right corner of the notebook.
 
 We also list some of the most important functions below.
+#### Import functions:
+- For log import: `from varexpm.utils import load_event_log`
+- For enhancement, discovery, visualization and evaluation: `from varexpm.cm_methods import (enhance_log_for_concise_model, discover_concise_model, build_concise_dfg, generate_evaluation_statistics_df)`
 #### Log import:
 - Import: `from varexpm.utils.data_importing import load_event_log`
 - `log = load_event_log("runningexample.xes", "input")`
