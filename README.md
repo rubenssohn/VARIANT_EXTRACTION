@@ -17,7 +17,7 @@ See information for each package below.
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
 3. Activate the new virtual environment with (in MacOS) `source [namevenv]/bin/activate` (on Windows) `.\[namevenv]\Scripts\activate` (Recommended)
 4. Install the package by going to the root folder in your terminal and:
-  - (option a - *recommended*) execute: `pip install -e .` (with notebook dependencies: `pip install -e .[notebooks]`), or
+  - (option a - *recommended*) execute: `pip install -e .` (with notebook dependencies: (MacOS) `pip install -e ".[notebooks]"`/(Windows) `pip install -e .[notebooks]`), or
   - (option b) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements.)
 
 > Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip varexpm`.
