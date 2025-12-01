@@ -15,9 +15,9 @@ See information for each package below.
 ### Setup
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
-3. Activate the new virtual environment with `source [namevenv]/bin/activate` (Recommended)
+3. Activate the new virtual environment with (in MacOS) `source [namevenv]/bin/activate` (on Windows) `.\[namevenv]\Scripts\activate` (Recommended)
 4. Install the package by going to the root folder in your terminal and:
-  - (option a) execute: `pip install -e .`, or
+  - (option a - *recommended*) execute: `pip install -e .` (with notebook dependencies: `pip install -e .[notebooks]`), or
   - (option b) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements.)
 
 > Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip varexpm`.
@@ -26,8 +26,9 @@ See information for each package below.
 Use the package with `import varexpm`.
 
 The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` help you to get to know the most important functions for log preparation, model discovery, and evaluation.
+> Note: If you use a jupyter notebook, make sure the kernel uses the packages. Best way to ensure this is to (1) have  `ipykernel` installed. Then, (2) create `python3 -m ipykernel install --user --name=[namevenv]` add your environment with the packages. Finally, (3) add it as a Kernel in the notebook.
 
-However, we also list some of the most important functions below.
+We also list some of the most important functions below.
 #### Log import:
 - Import: `from varexpm.utils.data_importing import load_event_log`
 - `log = load_event_log("runningexample.xes", "input")`
