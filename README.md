@@ -12,7 +12,7 @@ See information for each package below.
 
 *Figure: Three examples of concise models.*
 
-### Setup (working in this project)
+### Setup (for working in this project)
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
 3. Activate the new virtual environment with (on MacOS) `source [namevenv]/bin/activate` (on Windows) `.\[namevenv]\Scripts\activate` (Recommended)
@@ -21,8 +21,8 @@ See information for each package below.
     - You can add additional dependencies for jupyter notebook with: (MacOS) `pip install -e ".[notebooks]"`/(Windows) `pip install -e .[notebooks]`)
   - **Option b**) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements, not the package.)
 
-### Setup (for other projects)
-The package is distributed via PyPi, hence you can also us it in other projects by downloading it in your terminal using:
+### Setup (for using in other projects)
+The package is distributed via PyPi, hence you can also directly download it in your terminal using:
 - `pip install varexpm`
 
 *For more info, see: https://pypi.org/project/varexpm/*
