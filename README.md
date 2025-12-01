@@ -18,12 +18,11 @@ See information for each package below.
 3. Activate the new virtual environment with `python -m venv [namevenv]` (Recommended)
 3. Install the necessary requirements with `pip install -r requirements/requirements_base.txt`
 
+> Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip`.
+
 ### How to use the package
 Best way to use the package is to look at the tutorial in `notebooks/notebook_concisemodels_tutorial.ipynb`. 
 Here, we go through all the necessary functions for log preperation, model discovery, and evaluation.
-
-> Note: In a short time (a couple of days), you will be able to download the package using `pip`.
-
 
 ---
 ## (B) Context-Based Variant Extraction CLI Tool
