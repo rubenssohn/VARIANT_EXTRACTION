@@ -34,36 +34,65 @@ The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` is
 
 We also list some of the most important functions below.
 #### Import functions:
-- For log import: `from varexpm.utils import load_event_log`
-- For enhancement, discovery, visualization and evaluation: `from varexpm.cm_methods import (enhance_log_for_concise_model, discover_concise_model, build_concise_dfg, generate_evaluation_statistics_df)`
+Import functions
+```python
+from varexpm.utils import load_event_log # import log
+from varexpm.cm_methods import (enhance_log_for_concise_model, discover_concise_model, build_concise_dfg, generate_evaluation_statistics_df) # for enhancement, discovery, visualization, and evaluation
+```
 #### Log import:
-- Import: `from varexpm.utils.data_importing import load_event_log`
-- `log = load_event_log("runningexample.xes", "input")`
+```python
+log = load_event_log("runningexample.xes", "input")
+```
 
 *This function is based on `pm4py`, hence, you can also use pm4py directly. For the subsequent functions to work, you need to have imported an event log as a pandas dataframe.*
 
 #### Log enhancement:
-- Import: `from varexpm.cm_methods.cm_orchestrator import enhance_log_for_concise_model`
-- Define dependency threshold: `dependency_threshold=0.5`
-- Define number of stages: `num_stages = 2`
-- Define number of representative communities `num_comm_ranks=0` (0 returns all, 1 returns 2 nodes)
-- Define number of representative activites `num_act_ranks=0` (0 returns all, 1 returns 1)
-- Decide if you also want to hide the most common activities `hide_common_activities=False`
-- Enhance log: `log_comm = enhance_log_for_concise_model(log, num_stages = num_stages, dependency_threshold=dependency_threshold, num_comm_ranks=num_comm_ranks, num_act_ranks=num_act_ranks, hide_common_activities=hide_common_activities)`
+Define variables
+```python
+dependency_threshold=0.5 # Define dependency threshold
+num_stages = 2 # Define number of stages
+num_comm_ranks=0 # Define number of representative communities (0 returns all, 1 returns 2 nodes)
+num_act_ranks=0 # Define number of representative activites (0 returns all, 1 returns 1)
+hide_common_activities=False # Decide if you also want to hide the most common activities 
+```
+
+Enhance log
+```python
+log_comm = enhance_log_for_concise_model(
+  log, num_stages = num_stages, 
+  dependency_threshold=dependency_threshold, 
+  num_comm_ranks=num_comm_ranks, 
+  num_act_ranks=num_act_ranks, 
+  hide_common_activities=hide_common_activities)
+```
 
 #### Model discovery:
-- Import: `from varexpm.cm_methods.cm_orchestrator import discover_concise_model`
-- Discover model: `dfg_comm, s_comm, e_comm,stage_comm_dict, comm_acts_dict = discover_concise_model(log_comm)`
+```python
+dfg_comm, s_comm, e_comm,stage_comm_dict, comm_acts_dict = discover_concise_model(log_comm)
+```
 
 #### Model visualization:
-- Import: `from varexpm.cm_methods.visualization.concisemodelbuilder import build_concise_dfg`
-- Choose to hide non-representative activites in the graph `hide_hidden_activities = False`
-- Visualize model: `dot_res = build_concise_dfg(dfg_comm, s_comm, e_comm, comm_acts_dict, stage_comm_dict,hide_hidden_activities=hide_hidden_activities)`
-- Render: `dot_res`
+Choose to hide non-representative activites in the graph
+```python
+hide_hidden_activities = False
+```
+Visualize model
+```python
+dot_res = build_concise_dfg(
+  dfg_comm, s_comm, e_comm, comm_acts_dict, stage_comm_dict,hide_hidden_activities=hide_hidden_activities)
+dot_res # render
+```
 
 #### Model evaluation:
-- Import: `from varexpm.cm_methods.evaluation.evaluation import generate_evaluation_statistics_df`
-- Generate evaluation statistics: `eva = generate_evaluation_statistics_df(log_comm, dfg_comm,COMM_RANK_OVERALL_COL='community_rank_overall',log_name = log_name, log_name_col="log_name")`
+Generate evaluation statistics
+```python
+eva = generate_evaluation_statistics_df(
+  log_comm, 
+  dfg_comm,
+  COMM_RANK_OVERALL_COL='community_rank_overall',
+  log_name = "log_name", 
+  log_name_col="log_name")
+```
 
 ---
 ## (B) Context-Based Variant Extraction CLI Tool
