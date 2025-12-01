@@ -15,7 +15,7 @@ See information for each package below.
 ### Setup
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
-3. Activate the new virtual environment with `python -m venv [namevenv]` (Recommended)
+3. Activate the new virtual environment with `source [namevenv]/bin/activate` (Recommended)
 4. Install the package by going to the root folder in your terminal and:
   - (option a) execute: `pip install -e .`, or
   - (option b) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements.)
@@ -27,7 +27,7 @@ Use the package with `import varexpm`.
 
 The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` help you to get to know the most important functions for log preparation, model discovery, and evaluation.
 
-However, we also list of some of the most important functions below.
+However, we also list some of the most important functions below.
 #### Log import:
 - Import: `from varexpm.utils.data_importing import load_event_log`
 - `log = load_event_log("runningexample.xes", "input")`
