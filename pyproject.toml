@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "varexpm"
+version = "0.0.1"
+authors = [
+  { name="Christoffer Rubensson", email="christoffer.rubensson@hu-berlin.de" },
+]
+description = "A Python-Package to discover and evaluate process behavior such as models and variants from complex event data."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "AGPL-3.0"
+license-files = [
+    "LICENCE",
+    "LICENCES_thirdparty/*.LICENCE"
+]
+dependencies = [
+    "cdlib[C]>=0.4",
+    "graphviz>=0.21",
+    "networkx>=3.5",
+    "numpy>=2.2",
+    "pandas>=2.3",
+    "pm4py>=2.7",
+    "scikit-learn>=1.7",
+]
+keywords = [
+  "process mining", 
+  "event data", 
+  "complex event data", 
+  "variant extraction", 
+  "concise model discovery", 
+  "staging", 
+  "process simplification"]
+
+[project.urls]
+Homepage = "https://github.com/rubenssohn/VARIANT_EXTRACTION"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
