@@ -16,13 +16,42 @@ See information for each package below.
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
 3. Activate the new virtual environment with `python -m venv [namevenv]` (Recommended)
-3. Install the necessary requirements with `pip install -r requirements/requirements_base.txt`
+4. Install the package by going to the root folder in your terminal and:
+  - (option a) execute: `pip install -e .`, or
+  - (option b) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements.)
+5. Use the package with `import varexpm`.
 
-> Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip`.
+> Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip varexpm`.
 
 ### How to use the package
-Best way to use the package is to look at the tutorial in `notebooks/notebook_concisemodels_tutorial.ipynb`. 
-Here, we go through all the necessary functions for log preperation, model discovery, and evaluation.
+The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` help you to get to know the most important functions for log preparation, model discovery, and evaluation.
+
+However, we also list of some of the most important functions here:
+#### Log import:
+- `from varexpm.utils.data_importing import load_event_log`
+- (use pm4py or:) `log = load_event_log("runningexample.xes", "input")`
+
+#### Log enhancement:
+- `from varexpm.cm_methods.cm_orchestrator import enhance_log_for_concise_model`
+- Define dependency threshold: `dependency_threshold=0.5`
+- Define number of stages: `num_stages = 2`
+- Define number of representative communities `num_comm_ranks=0` (0 returns all, 1 returns 2 nodes)
+- Define number of representative activites `num_act_ranks=0` (0 returns all, 1 returns 1)
+- Decide if you also want to hide the most common activities `hide_common_activities=False`
+- Enhance log: `df_comm = enhance_log_for_concise_model(df, num_stages = num_stages, dependency_threshold=dependency_threshold, num_comm_ranks=num_comm_ranks, num_act_ranks=num_act_ranks, hide_common_activities=hide_common_activities)`
+
+#### Model discovery:
+- `from varexpm.cm_methods.cm_orchestrator import discover_concise_model`
+- Discover model: `dfg_comm, s_comm, e_comm,stage_comm_dict, comm_acts_dict = discover_concise_model(df_comm)`
+
+#### Model visualization:
+- `from varexpm.cm_methods.visualization.concisemodelbuilder import build_concise_dfg`
+- Choose to hide non-representative activites in the graph `hide_hidden_activities = False``
+- Visualize model: `dot_res = build_concise_dfg(dfg_comm, s_comm, e_comm, comm_acts_dict, stage_comm_dict,hide_hidden_activities=hide_hidden_activities)`
+
+#### Model evaluation:
+- `from varexpm.cm_methods.evaluation.evaluation import generate_evaluation_statistics_df`
+- Generate evaluation statistics: `eva = generate_evaluation_statistics_df(df_comm, dfg_comm,COMM_RANK_OVERALL_COL='community_rank_overall',log_name = log_name, log_name_col="log_name")`
 
 ---
 ## (B) Context-Based Variant Extraction CLI Tool
