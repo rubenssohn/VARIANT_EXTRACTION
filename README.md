@@ -24,7 +24,10 @@ See information for each package below.
 > Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip varexpm`.
 
 ### How to use the package
-Use the package with `import varexpm` in a notebook or Python-script.
+Import package in a notebook or Python-script with: 
+```python
+import varexpm 
+```
 
 The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` is the best way to get to know the most important functions for log preparation, model discovery, and evaluation.
 > Note: If you use a jupyter notebook, make sure the kernel uses the packages. Best way to ensure this is to 
