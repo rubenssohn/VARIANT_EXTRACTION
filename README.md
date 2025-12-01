@@ -15,7 +15,7 @@ See information for each package below.
 ### Setup
 1. Download and place the "VARIANT_EXTRACTION" folder somewhere on your computer
 2. Create a new virtual environment with `python -m venv [namevenv]` (Recommended)
-3. Activate the new virtual environment with (in MacOS) `source [namevenv]/bin/activate` (on Windows) `.\[namevenv]\Scripts\activate` (Recommended)
+3. Activate the new virtual environment with (on MacOS) `source [namevenv]/bin/activate` (on Windows) `.\[namevenv]\Scripts\activate` (Recommended)
 4. Install the package by going to the root folder in your terminal and:
   - (option a - *recommended*) execute: `pip install -e .` (with notebook dependencies: (MacOS) `pip install -e ".[notebooks]"`/(Windows) `pip install -e .[notebooks]`), or
   - (option b) execute: `pip install -r requirements/requirements_base.txt` (only installs the necessary requirements.)
@@ -23,9 +23,9 @@ See information for each package below.
 > Note 2025-11-29: In short time (a couple of days), you will be able to download the package using `pip varexpm`.
 
 ### How to use the package
-Use the package with `import varexpm`.
+Use the package with `import varexpm` in a notebook or Python-script.
 
-The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` help you to get to know the most important functions for log preparation, model discovery, and evaluation.
+The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` is the best way to get to know the most important functions for log preparation, model discovery, and evaluation.
 > Note: If you use a jupyter notebook, make sure the kernel uses the packages. Best way to ensure this is to (1) have  `ipykernel` installed. Then, (2) create `python3 -m ipykernel install --user --name=[namevenv]` add your environment with the packages. Finally, (3) add it as a Kernel in the notebook.
 
 We also list some of the most important functions below.
@@ -129,7 +129,7 @@ The properties are limited to the functions above. However, there is a possibili
 ---
 ### TROUBLESHOOTING
 **(1) Import problem/Directory problem:**
-The program was only tested in MacOS. On other OS, the program might have trouble finding the folders in the directories of your computer. 
+The program was only tested on MacOS. On other OS, the program might have trouble finding the folders in the directories of your computer. 
 Please consider adapting the import and export functions in "/ve_methods/ve_logprocessing.py."
 
 **(2) Log transformation problem/Property definition problem:**
