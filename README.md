@@ -1,6 +1,6 @@
 # VARIANT_EXTRACTION
 This repository comprises packages for extract and visualize process variants and models for complex event data. It contains the following:
-- (A) `variant_extraction/cm_methods`: A visualization package for deriving and evaluating **concise models** from large, unstructured data (Associated with a submission for CAiSE 2026), and
+- (A) `varexpm/cm_methods`: A visualization package for deriving and evaluating **concise models** from large, unstructured data (Associated with a submission for CAiSE 2026), and
 - (B) `ve_methods`, `ve_main`: A CLI-Tool for extracting **context-based process variants** (Associated with the article Rubensson et al., 2024).
 
 See information for each package below.
