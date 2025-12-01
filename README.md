@@ -28,9 +28,9 @@ Use the package with `import varexpm` in a notebook or Python-script.
 
 The tutorial notebook under `notebooks/notebook_concisemodels_tutorial.ipynb` is the best way to get to know the most important functions for log preparation, model discovery, and evaluation.
 > Note: If you use a jupyter notebook, make sure the kernel uses the packages. Best way to ensure this is to 
- - (1) have  `ipykernel` installed (also available as optional dependencies, see above). 
- - Then, (2) create `python3 -m ipykernel install --user --name=[namevenv]` add your environment with the packages. 
- - Finally, (3) open jupyter with `jupyter lab` in the terminal, go to the notebook, and add the environment as a kernel in the upper-right corner of the notebook.
+> - (1) have  `ipykernel` installed (also available as optional dependencies, see above). 
+> - Then, (2) create `python3 -m ipykernel install --user --name=[namevenv]` add your environment with the packages. 
+> - Finally, (3) open jupyter with `jupyter lab` in the terminal, go to the notebook, and add the environment as a kernel in the upper-right corner of the notebook.
 
 We also list some of the most important functions below.
 #### Log import:
